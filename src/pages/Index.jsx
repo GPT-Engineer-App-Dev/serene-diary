@@ -1,8 +1,9 @@
-import { Container, Text, VStack, Heading, Box, Image, Link, Button } from "@chakra-ui/react";
+import { Container, Text, VStack, Heading, Box, Image, Link, Button, useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const Index = () => {
   const [posts, setPosts] = useState([]);
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     const storedPosts = JSON.parse(localStorage.getItem("posts")) || [];
@@ -24,7 +25,7 @@ const Index = () => {
         <Button colorScheme="teal" as={Link} href="/add-post">Add New Post</Button>
         <VStack spacing={4} width="100%">
           {posts.map((post, index) => (
-            <Box key={index} p={5} shadow="md" borderWidth="1px" width="100%">
+            <Box key={index} p={5} shadow="md" borderWidth="1px" width="100%" bg={colorMode === "light" ? "white" : "gray.700"}>
               <Heading fontSize="xl">{post.title}</Heading>
               <Text mt={4}>{post.content}</Text>
             </Box>
